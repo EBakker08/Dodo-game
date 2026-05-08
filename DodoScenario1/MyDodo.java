@@ -25,7 +25,7 @@ public class MyDodo extends Dodo
      *
      */
     public void move() {
-        if ( canMove() ) {
+        if ( canMove()) {
             step();
         } else {
             showError( "I'm stuck!" );
@@ -135,5 +135,10 @@ public class MyDodo extends Dodo
         }else{
             return true;
         }
+    }
+    
+    public void turn180() {
+        turnRight();
+        turnRight();
     }
 }
