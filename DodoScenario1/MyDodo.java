@@ -91,6 +91,7 @@ public class MyDodo extends Dodo
             move();                         // take a step
             nrStepsTaken++;                 // increment the counter
         }
+        System.out.println(distance + " stappen gemaakt.");
     }
 
     
