@@ -8,6 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyDodo extends Dodo
 {
     private int myNrOfEggsHatched;
+    private int xCoordinates = 0;
+    private int yCoordinates = 0;
     
     public MyDodo() {
         super( EAST );
@@ -113,7 +115,19 @@ public class MyDodo extends Dodo
     public void walkToWorldEdgePrintingCoordinates( ){
         while( ! borderAhead() ){
             // print coordinates
-            move();
+            if (canMove() == true) {
+                System.out.println("Current position is " + xCoordinates + ", " + yCoordinates);
+            
+                move();
+            
+                xCoordinates++;
+            }
+            
+            //System.out.println("Current position is X: " + xCoordinates + " Y: " + yCoordinates);
+            
+            //move();
+            
+            //xCoordinates = xCoordinates + 1;
         }
     }
 
