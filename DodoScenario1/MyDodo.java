@@ -155,4 +155,15 @@ public class MyDodo extends Dodo
         turnRight();
         turnRight();
     }
+    
+    public void climbOverFence() {
+        turnLeft();
+        move();
+        turnRight();
+        move();
+        move();
+        turnRight();
+        move();
+        turnLeft();
+    }
 }
