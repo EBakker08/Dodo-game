@@ -122,12 +122,6 @@ public class MyDodo extends Dodo
             
                 xCoordinates++;
             }
-            
-            //System.out.println("Current position is X: " + xCoordinates + " Y: " + yCoordinates);
-            
-            //move();
-            
-            //xCoordinates = xCoordinates + 1;
         }
     }
 
@@ -165,5 +159,13 @@ public class MyDodo extends Dodo
         turnRight();
         move();
         turnLeft();
+    }
+    
+    public boolean grainAhead() {
+        if (onGrain()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
