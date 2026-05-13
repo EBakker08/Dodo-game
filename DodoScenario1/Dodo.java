@@ -65,8 +65,6 @@ public abstract class Dodo extends Actor
     
     public boolean onGrain() {
         return getActor( Grain.class ) != null;
-        
-        
     }
 
     public void layEgg() {
