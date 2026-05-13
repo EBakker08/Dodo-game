@@ -98,9 +98,6 @@ public class MyDodo extends Dodo
             System.out.println(nrStepsTaken + " steps made.");  // Otherwise print the steps that will be made
         }
     }
-
-    
-    
     
     /**
      * Walks to edge of the world printing the coordinates at each step
@@ -113,7 +110,6 @@ public class MyDodo extends Dodo
         while( ! borderAhead() ){
             if (canMove() == true) {    // As long as canMove() = true move while printing coordinates
                 System.out.println("Current position is " + getX() + ", " + getY());    // Show what current location is
-            
                 move(); // Move
             }
         }
