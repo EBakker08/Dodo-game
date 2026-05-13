@@ -8,8 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MyDodo extends Dodo
 {
     private int myNrOfEggsHatched;
-    private int xCoordinates = 0;
-    private int yCoordinates = 0;
     
     public MyDodo() {
         super( EAST );
@@ -111,16 +109,12 @@ public class MyDodo extends Dodo
      * <p> Final:   Dodo is on East side of world facing East.
      *              Coordinates of each cell printed in the console.
      */
-
     public void walkToWorldEdgePrintingCoordinates( ){
         while( ! borderAhead() ){
-            // print coordinates
-            if (canMove() == true) {
-                System.out.println("Current position is " + xCoordinates + ", " + yCoordinates);    // Show what current location is
+            if (canMove() == true) {    // As long as canMove() = true move while printing coordinates
+                System.out.println("Current position is " + getX() + ", " + getY());    // Show what current location is
             
                 move(); // Move
-            
-                xCoordinates++; // Add 1 to the coordinate X
             }
         }
     }
