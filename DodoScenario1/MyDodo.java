@@ -46,9 +46,9 @@ public class MyDodo extends Dodo
      *                      (an obstruction or end of world ahead)
      */
     public boolean canMove() {
-        if ( borderAhead() || fenceAhead()){
+        if ( borderAhead() || fenceAhead()){    // If border OR fence is ahead then Dodo can't move
             return false;
-        } else {
+        } else {    // Otherwise Dodo can move
             return true;
         }
     }
@@ -94,10 +94,10 @@ public class MyDodo extends Dodo
             nrStepsTaken++;                 // increment the counter
         }
         
-        if (distance <= 0) {
+        if (distance <= 0) {    // If the distance Dodo wants to travel is 0 or lower then
             // Do nothing
         } else {
-            System.out.println(distance + " steps made.");
+            System.out.println(nrStepsTaken + " steps made.");  // Otherwise print the steps that will be made
         }
     }
 
@@ -116,11 +116,11 @@ public class MyDodo extends Dodo
         while( ! borderAhead() ){
             // print coordinates
             if (canMove() == true) {
-                System.out.println("Current position is " + xCoordinates + ", " + yCoordinates);
+                System.out.println("Current position is " + xCoordinates + ", " + yCoordinates);    // Show what current location is
             
-                move();
+                move(); // Move
             
-                xCoordinates++;
+                xCoordinates++; // Add 1 to the coordinate X
             }
         }
     }
@@ -146,27 +146,28 @@ public class MyDodo extends Dodo
     }
     
     public void turn180() {
-        turnRight();
-        turnRight();
+        turnRight();    // Turn 90 degrees
+        turnRight();    // Turn 90 degrees
+                        // 90 + 90 = 180 so turned 180 degrees
     }
     
     public void climbOverFence() {
-        turnLeft();
-        move();
-        turnRight();
-        move();
-        move();
-        turnRight();
-        move();
-        turnLeft();
+        turnLeft();     // Face upwards
+        move();         // Move up
+        turnRight();    // Turn facing right
+        move();         // Move to the right
+        move();         // Move to the right
+        turnRight();    // Face down
+        move();         // Move down
+        turnLeft();     // Turn facing right
     }
     
     public boolean grainAhead() {
         if (onGrain()) {
-            turn180();
-            move();
-            turn180();
-            return true;
+            turn180();      // Turn to left
+            move();         // Move left
+            turn180();      // Turn to right
+            return true;    // Return true
         } else {
             turn180();
             move();
