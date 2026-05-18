@@ -106,10 +106,9 @@ public class MyDodo extends Dodo
      * <p> Final:   Dodo is on East side of world facing East.
      *              Coordinates of each cell printed in the console.
      */
-    public void walkToWorldEdgePrintingCoordinates( ){
+    public void walkToWorldEdge( ){
         while( ! borderAhead() ){
             if (canMove() == true) {    // As long as canMove() = true move while printing coordinates
-                System.out.println("Current position is " + getX() + ", " + getY());    // Show what current location is
                 move(); // Move
             }
         }
