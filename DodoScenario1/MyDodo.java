@@ -190,13 +190,29 @@ public class MyDodo extends Dodo
     }
     
     /**
-     * Dodo gaat naar het einde van de map en kijkt de andere kant op.
+     * Dodo walks to end of map and faces the other way.
      * 
-     * <p> Initial: Dodo is ergens in de wereld.
-     * <p> Final: Dodo staat op de laatste cell van zijn pad en kijkt de andere kant op.
+     * <p> Initial: Dodo is somewhere in the world.
+     * <p> Final: Dodo is on the last cell in the world facing the other way.
      */
     public void goBackToStartOfRowAndFaceBack() {
         walkToWorldEdge();
         turn180();
+    }
+    
+    /**
+     * Dodo walks to end of map climbing over fences.
+     * 
+     * <p> Initial: Dodo is somewhere in the world.
+     * <p> Final: Dodo is at the end of the world map and has climbed over all fences in it's path.
+     */
+    public void walkToWorldEdgeClimbingOverFence() {
+        while (borderAhead() == false) {
+            if (fenceAhead() == true) {
+                climbOverFence();
+            } else {
+                move();
+            }
+        }
     }
 }
