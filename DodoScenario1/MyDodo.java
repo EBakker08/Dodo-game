@@ -215,4 +215,20 @@ public class MyDodo extends Dodo
             }
         }
     }
+    
+    /**
+     * Dodo walks to end of world while picking up grains and printing those coordinates.
+     * 
+     * <p> Initial: Dodo is somewhere in the world with grains in it's path.
+     * <p> Final: Dodo is at end of world and has picked up every grain and printed the coordinates of those grains.
+     */
+    public void pickUpGrainsAndPrintCoordinates() {
+        while (borderAhead() == false) {
+            move();
+            if (onGrain() == true) {
+                pickUpGrain();
+                System.out.println("X: " + super.getX() + " Y: " + super.getY());
+            }
+        }
+    }
 }
