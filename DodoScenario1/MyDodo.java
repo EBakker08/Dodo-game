@@ -161,20 +161,16 @@ public class MyDodo extends Dodo
     }
     
     /**
+     * Dodo checks if there is a grain ahead of him.
      * 
+     * <p> Initial: Dodo is behind a cell with a grain
+     * <p> Final: Dodo is one cell behind the grain and says that there is a grain infront of it.
      */
     public boolean grainAhead() {
-        if (onGrain()) {
-            turn180();      // Turn to left
-            move();         // Move left
-            turn180();      // Turn to right
-            return true;    // Return true
-        } else {
-            turn180();
-            move();
-            turn180();
-            return false;
-        }
+        move();                         // Move foward once.
+        boolean onGrain = onGrain();    // Check if Dodo is standing on a grain.
+        stepOneCellBackwards();         // Step backwards to original cell.
+        return onGrain;                 // Return the result.
     }
     
     /**
@@ -230,5 +226,17 @@ public class MyDodo extends Dodo
                 System.out.println("X: " + super.getX() + " Y: " + super.getY());
             }
         }
+    }
+    
+    /**
+     * 
+     * 
+     * <p> Initial: 
+     * <p> Final: 
+     */
+    public void stepOneCellBackwards() {
+        turn180();
+        move();
+        turn180();
     }
 }
