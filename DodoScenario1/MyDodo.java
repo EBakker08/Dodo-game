@@ -188,4 +188,15 @@ public class MyDodo extends Dodo
             move();
         }
     }
+    
+    /**
+     * Dodo gaat naar het einde van de map en kijkt de andere kant op.
+     * 
+     * <p> Initial: Dodo is ergens in de wereld.
+     * <p> Final: Dodo staat op de laatste cell van zijn pad en kijkt de andere kant op.
+     */
+    public void goBackToStartOfRowAndFaceBack() {
+        walkToWorldEdge();
+        turn180();
+    }
 }
