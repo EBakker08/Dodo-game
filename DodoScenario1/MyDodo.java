@@ -229,14 +229,31 @@ public class MyDodo extends Dodo
     }
     
     /**
+     * Dodo takes one step back.
      * 
-     * 
-     * <p> Initial: 
-     * <p> Final: 
+     * <p> Initial: Dodo is somewhere in the world.
+     * <p> Final: Dodo is one cell behind the original position.
      */
     public void stepOneCellBackwards() {
         turn180();
         move();
         turn180();
+    }
+    
+    /**
+     * Dodo walks to the end of the world and lays eggs in every empty nest.
+     * 
+     * <p> Initial: Dodo is somewhere in the world with nests in its path.
+     * <p> Final: Dodo is at the edge of the world and has layed eggs in every empty nest.
+     */
+    public void walkToWorldEdgeAndLayEggs() {
+        while (!borderAhead()) {
+            move();
+            if (onNest()) {
+                if (!onEgg()) {
+                    layEgg();
+                }
+            }
+        }
     }
 }
