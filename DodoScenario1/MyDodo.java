@@ -202,12 +202,17 @@ public class MyDodo extends Dodo
      * <p> Initial: Dodo is somewhere in the world.
      * <p> Final: Dodo is at the end of the world map and has climbed over all fences in it's path.
      */
-    public void walkToWorldEdgeClimbingOverFence() {
-        while (borderAhead() == false) {
+    public void walkToWorldEdgeClimbingOverFenceAndLayEgg() {
+        while (!onNest()) {
+            move();
             if (fenceAhead() == true) {
                 climbOverFence();
-            } else {
-                move();
+            }
+            
+            if (onNest() == true) {
+                if (!onEgg()) {
+                    layEgg();
+                }
             }
         }
     }
