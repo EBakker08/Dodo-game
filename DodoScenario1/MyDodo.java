@@ -197,10 +197,10 @@ public class MyDodo extends Dodo
     }
     
     /**
-     * Dodo walks to end of map climbing over fences.
+     * Dodo walks to a nest climbing over fences.
      * 
      * <p> Initial: Dodo is somewhere in the world.
-     * <p> Final: Dodo is at the end of the world map and has climbed over all fences in it's path.
+     * <p> Final: Dodo is at a nest and layed an egg while he has climbed over all fences in its path.
      */
     public void walkToWorldEdgeClimbingOverFenceAndLayEgg() {
         while (!onNest()) {
@@ -258,6 +258,24 @@ public class MyDodo extends Dodo
                 if (!onEgg()) {
                     layEgg();
                 }
+            }
+        }
+    }
+    
+    /**
+     * 
+     * 
+     * <p> Initial: 
+     * <p> Final: 
+     */
+    public void walkAroundFencedArea() {
+        while (!onEgg()) {
+            turnRight();
+            if (fenceAhead()) {
+                turnLeft();
+                move();
+            } else {
+                move();
             }
         }
     }
