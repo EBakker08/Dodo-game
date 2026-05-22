@@ -263,19 +263,17 @@ public class MyDodo extends Dodo
     }
     
     /**
+     * Dodo walk around the fences to get to an egg.
      * 
-     * 
-     * <p> Initial: 
-     * <p> Final: 
+     * <p> Initial: Dodo is somewhere in the world with fences making a path to an egg.
+     * <p> Final: Dodo is on the egg after completing the loop around the fences.
      */
     public void walkAroundFencedArea() {
         while (!onEgg()) {
+            move();
             turnRight();
-            if (fenceAhead()) {
+            while (fenceAhead()) {
                 turnLeft();
-                move();
-            } else {
-                move();
             }
         }
     }
