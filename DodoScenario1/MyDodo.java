@@ -297,4 +297,23 @@ public class MyDodo extends Dodo
             }
         }
     }
+    
+    /**
+     * Dodo solves maze.
+     * 
+     * <p> Initial: Dodo is somewhere in a maze of fences with one nest at the end.
+     * <p> Final: Dodo is on nest and has solved the maze.
+     */
+    public void walkToNestInMaze() {
+        while (!onNest()) {
+            if (canMove()) {
+                move();
+            } else if (!canMove()) {
+                turnRight();
+                if (!canMove()) {
+                    turn180();
+                }
+            }
+        }
+    }
 }
