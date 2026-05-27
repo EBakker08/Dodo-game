@@ -277,4 +277,24 @@ public class MyDodo extends Dodo
             }
         }
     }
+    
+    /**
+     * Dodo walks over path of eggs to nest.
+     * 
+     * <p> Initial: Dodo is somewhere in world with trail of eggs infront of it.
+     * <p> Final: Dodo is on nest after following trail of eggs.
+     */
+    public void eggTrailToNest() {
+        move();
+        while (!onNest()) {
+            if (eggAhead() || nestAhead()) {
+                move ();
+            } else {
+                turnRight();
+                if (!eggAhead()) {
+                    turn180();
+                }
+            }
+        }
+    }
 }
