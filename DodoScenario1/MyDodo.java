@@ -368,4 +368,38 @@ public class MyDodo extends Dodo
         System.out.println(blueEgg.getValue());
         System.out.println(goldenEgg.getValue());
     }
+    
+    /**
+     * Dodo walks to coordinates that user has put in.
+     * 
+     * <p> Initial: Dodo is somewhere in the world.
+     * <p> Final: Dodo has walked to coordinates that user put in and faces east.
+     */
+    public void goToLocation(int coordX, int coordY){
+        int moveX = coordX - getX();
+        int moveY = coordY - getY();
+        
+        if(moveX > 0){
+           setDirection(0);
+           turnRight();
+           jump(moveX);
+        }else{
+           moveX = moveX *-1;
+           setDirection(0);
+           turnLeft();
+           jump(moveX);
+        }
+        
+        if(moveY < 0){
+           moveY = moveY *-1;
+           setDirection(0);
+           jump(moveY);
+        }else{
+           setDirection(0);
+           turn180();
+           jump(moveY);
+        }
+        
+        faceEast();
+    }
 }
