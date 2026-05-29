@@ -49,7 +49,7 @@ comment23.target=void\ faceDirection(int)
 comment23.text=\r\n\ Dodo\ faces\ the\ direction\ user\ tells\ it\ to\ look\ (0\ \=\ North,\ 1\ \=\ East,\ 2\ \=\ South\ and\ 3\ \=\ West)\r\n\ \r\n\ <p>\ Initial\:\ Dodo\ is\ facing\ any\ direction.\r\n\ <p>\ Final\:\ Dodo\ is\ facing\ the\ direction\ that\ the\ user\ told\ it\ to.\r\n
 comment24.params=
 comment24.target=void\ temporaryValueEgg()
-comment24.text=\r\n\ \r\n
+comment24.text=\r\n\ The\ value\ of\ blue\ egg\ and\ golden\ egg\ are\ switched.\r\n\ \r\n\ <p>\ Initial\:\ Golden\ egg\ and\ blue\ egg\ have\ their\ original\ value.\r\n\ <p>\ Final\:\ The\ values\ of\ the\ two\ eggs\ are\ switched.\r\n
 comment3.params=
 comment3.target=void\ move()
 comment3.text=\r\n\ Move\ one\ cell\ forward\ in\ the\ current\ direction.\r\n\ \r\n\ <P>\ Initial\:\ Dodo\ is\ somewhere\ in\ the\ world\r\n\ <P>\ Final\:\ If\ possible,\ Dodo\ has\ moved\ forward\ one\ cell\r\n\r\n

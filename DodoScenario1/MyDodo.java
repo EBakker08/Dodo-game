@@ -349,4 +349,23 @@ public class MyDodo extends Dodo
         }
     }
     
+    /**
+     * The value of blue egg and golden egg are switched.
+     * 
+     * <p> Initial: Golden egg and blue egg have their original value.
+     * <p> Final: The values of the two eggs are switched.
+     */
+    public void temporaryValueEgg() {
+        BlueEgg blueEgg = new BlueEgg();
+        GoldenEgg goldenEgg = new GoldenEgg();
+        
+        System.out.println(blueEgg.getValue());
+        System.out.println(goldenEgg.getValue());
+        
+        goldenEgg.setValue(blueEgg.getValue());
+        blueEgg.setValue(goldenEgg.getValue());
+        
+        System.out.println(blueEgg.getValue());
+        System.out.println(goldenEgg.getValue());
+    }
 }
