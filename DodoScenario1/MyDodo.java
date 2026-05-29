@@ -334,4 +334,19 @@ public class MyDodo extends Dodo
             turnRight();
         }
     }
+    
+    /**
+     * Dodo faces the direction user tells it to look (0 = North, 1 = East, 2 = South and 3 = West)
+     * 
+     * <p> Initial: Dodo is facing any direction.
+     * <p> Final: Dodo is facing the direction that the user told it to.
+     */
+    public void faceDirection(int newDirection) {
+        if (newDirection >= 0 && newDirection <= 3) {
+            while (getDirection() != newDirection) {
+                turnRight();
+            }
+        }
+    }
+    
 }
