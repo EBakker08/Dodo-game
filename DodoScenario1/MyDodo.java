@@ -306,14 +306,22 @@ public class MyDodo extends Dodo
      */
     public void walkToNestInMaze() {
         while (!onNest()) {
+            turnRight();
             if (canMove()) {
                 move();
-            } else if (!canMove()) {
-                turnRight();
-                if (!canMove()) {
-                    turn180();
+            } else {
+                turnLeft();
+                while (!canMove()) {
+                    turnLeft();
                 }
+                move();
             }
         }
+        
+        if (onNest()) {
+            showCompliment("Congratulations! You found the nest.");
+        }
     }
+    
+    
 }
