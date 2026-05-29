@@ -323,5 +323,15 @@ public class MyDodo extends Dodo
         }
     }
     
-    
+    /**
+     * Dodo goes to look to the east.
+     * 
+     * <p> Initial: Dodo looks any direction (North, East, South or West).
+     * <p> Final: Dodo has turned to look at the east.
+     */
+    public void faceEast() {
+        while (getDirection() != EAST) {
+            turnRight();
+        }
+    }
 }
