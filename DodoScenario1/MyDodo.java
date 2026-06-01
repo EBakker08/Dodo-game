@@ -402,4 +402,21 @@ public class MyDodo extends Dodo
         
         faceEast();
     }
+    
+    /**
+     * Check if coordinate input is lower or equal to world width and height.
+     * 
+     * <p> Initial: Dodo is somewhere in world.
+     * <p> Final: Coordinate input gets validated.
+     */
+    public boolean validCoordinates(int x, int y) {
+        if (x > getWorld().getWidth() || y > getWorld().getWidth()) {
+            showError("Invalid Coordinates!");
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
 }
