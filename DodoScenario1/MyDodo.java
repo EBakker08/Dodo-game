@@ -418,5 +418,26 @@ public class MyDodo extends Dodo
         return true;
     }
     
-    
+    /**
+     * Dodo counts all the eggs in its path.
+     * 
+     * <p> Initial: Dodo is somewhere in the world.
+     * <p> Final: Dodo has returned to its original position and counted all the eggs in its path.
+     */
+    public int countEggsInRow() {
+        int eggCounter = 0;
+        while (!borderAhead()) {
+            if (onEgg()) {
+                eggCounter++;
+            }
+            
+            move();
+        }
+        
+        turn180();
+        walkToWorldEdge();
+        turn180();
+        
+        return eggCounter;
+    }
 }
