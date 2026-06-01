@@ -440,4 +440,25 @@ public class MyDodo extends Dodo
         
         return eggCounter;
     }
+    
+    /**
+     * Dodo lays a trail of eggs set by the user.
+     * 
+     * <p> Initial: Dodo is somewhere in world.
+     * <p> Final: Dodo has walked the users amount and layed eggs.
+     */
+    public void layTrailOfEggs(int layEgg) {
+        int moved = 0;
+        
+        while (moved < layEgg) {
+            if (borderAhead()) {
+                showError("Can't move!");
+                moved = layEgg;
+            }
+            
+            move();
+            layEgg();
+            moved++;
+        }
+    }
 }
