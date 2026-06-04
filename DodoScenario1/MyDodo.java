@@ -426,17 +426,19 @@ public class MyDodo extends Dodo
      */
     public int countEggsInRow() {
         int eggCounter = 0;
+        if (onEgg()) {
+            eggCounter++;
+        }
+        
         while (!borderAhead()) {
             if (onEgg()) {
                 eggCounter++;
             }
-            
             move();
         }
         
         turn180();
-        walkToWorldEdge();
-        turn180();
+        goBackToStartOfRowAndFaceBack();
         
         return eggCounter;
     }
@@ -460,5 +462,30 @@ public class MyDodo extends Dodo
             layEgg();
             moved++;
         }
+    }
+    
+    /**
+     * Dodo counts all the eggs in the world.
+     * 
+     * <p> Initial: Dodo is at the top left of the world.
+     * <p> Final: Dodo has counted all eggs in the world and has returned to his starting position facing east.
+     */
+    public void countAllEggsInWorld() {
+        int countedEggs = 0;
+        
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
+            countedEggs = countedEggs + countEggsInRow();
+            System.out.println(countedEggs);
+            turnRight();
+            if (!borderAhead()) {
+                move();
+                turnLeft();
+            }
+        }
+        
+        goToLocation(0, 0);
+        faceDirection(1);
+        
+        showCompliment("Congratulations! You've collected " + countedEggs);
     }
 }
