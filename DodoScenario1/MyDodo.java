@@ -104,10 +104,8 @@ public class MyDodo extends Dodo
      * <p> Final:   Dodo is on East side of world facing East. Coordinates of each cell printed in the console.
      */
     public void walkToWorldEdge( ){
-        while( ! borderAhead() ){
-            if (canMove() == true) {    // As long as canMove() = true move while printing coordinates
-                move(); // Move
-            }
+        while(canMove()){
+            move();
         }
     }
 
@@ -196,6 +194,7 @@ public class MyDodo extends Dodo
      * <p> Final: Dodo is on the last cell in the world facing the other way.
      */
     public void goBackToStartOfRowAndFaceBack() {
+        turn180();
         walkToWorldEdge();
         turn180();
     }
@@ -455,15 +454,9 @@ public class MyDodo extends Dodo
      */
     public void layTrailOfEggs(int layEgg) {
         int moved = 0;
-        
         while (moved < layEgg) {
-            if (borderAhead()) {
-                showError("Can't move!");
-                moved = layEgg;
-            }
-            
-            move();
             layEgg();
+            move();
             moved++;
         }
     }
@@ -504,7 +497,7 @@ public class MyDodo extends Dodo
                 highestEggAmount = highestEggAmount + countEggsInRow();
                 highestEggsAmountRow = onRow;
             }
-            
+        
             turnRight();
             if (!borderAhead()) {
                 move();
@@ -518,5 +511,21 @@ public class MyDodo extends Dodo
         
         goToLocation(0, 0);
         faceDirection(1);
+    }
+    
+    public void makeStairOfEggs() {
+        for (int worldWidth = 0; worldWidth < getWorld().getWidth(); worldWidth++) {
+            if(canMove()) {
+                layTrailOfEggs(worldWidth + 1); 
+                goBackToStartOfRowAndFaceBack();
+                turnRight();
+                if (!borderAhead()) {
+                    move();
+                    turnLeft();
+                } else {
+                    turnLeft();
+                }
+            }
+        }
     }
 }
