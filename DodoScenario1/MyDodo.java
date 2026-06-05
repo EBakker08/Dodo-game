@@ -150,6 +150,7 @@ public class MyDodo extends Dodo
      */
     
     public void climbOverFence() {
+        if (fenceAhead()) {
         turnLeft();     // Face upwards
         move();         // Move up
         turnRight();    // Turn facing right
@@ -158,6 +159,9 @@ public class MyDodo extends Dodo
         turnRight();    // Face down
         move();         // Move down
         turnLeft();     // Turn facing right
+        } else {
+            showError("No fence to climb!");
+        }
     }
     
     /**
@@ -487,5 +491,32 @@ public class MyDodo extends Dodo
         faceDirection(1);
         
         showCompliment("Congratulations! You've collected " + countedEggs);
+    }
+    
+    public void findRowWithMostEggs() {
+        int onRow = 0;
+        int highestEggsAmountRow = 0;
+        int highestEggAmount = 0;
+        
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
+            System.out.println("On row " + onRow + " is/are " + countEggsInRow() + " egg(s)");
+            if (countEggsInRow() > highestEggAmount) {
+                highestEggAmount = highestEggAmount + countEggsInRow();
+                highestEggsAmountRow = onRow;
+            }
+            
+            turnRight();
+            if (!borderAhead()) {
+                move();
+                turnLeft();
+            }
+            
+            onRow++;
+        }
+        
+        System.out.println("On row " + highestEggsAmountRow + " are the most eggs.");
+        
+        goToLocation(0, 0);
+        faceDirection(1);
     }
 }
