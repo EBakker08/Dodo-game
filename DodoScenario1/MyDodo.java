@@ -527,5 +527,8 @@ public class MyDodo extends Dodo
                 }
             }
         }
+        
+        goToLocation(0, 0);
+        faceDirection(1);
     }
 }
