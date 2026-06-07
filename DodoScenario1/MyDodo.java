@@ -454,10 +454,14 @@ public class MyDodo extends Dodo
      */
     public void layTrailOfEggs(int layEgg) {
         int moved = 0;
+        
         while (moved < layEgg) {
             layEgg();
-            move();
             moved++;
+            if (borderAhead()) {
+                break;
+            }
+            move();
         }
     }
     
@@ -486,6 +490,12 @@ public class MyDodo extends Dodo
         showCompliment("Congratulations! You've collected " + countedEggs);
     }
     
+    /**
+     * Dodo finds the row with the most eggs
+     * 
+     * <p> Initial: Dodo is at the top left of the world.
+     * <p> Final: Dodo is back at the top left of the world and has counted all rows for eggs.
+     */
     public void findRowWithMostEggs() {
         int onRow = 0;
         int highestEggsAmountRow = 0;
@@ -493,14 +503,17 @@ public class MyDodo extends Dodo
         
         for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
             System.out.println("On row " + onRow + " is/are " + countEggsInRow() + " egg(s)");
+            
             if (countEggsInRow() > highestEggAmount) {
-                highestEggAmount = highestEggAmount + countEggsInRow();
+                highestEggAmount = highestEggAmount;
                 highestEggsAmountRow = onRow;
             }
         
             turnRight();
             if (!borderAhead()) {
                 move();
+                turnLeft();
+            } else {
                 turnLeft();
             }
             
@@ -513,6 +526,12 @@ public class MyDodo extends Dodo
         faceDirection(1);
     }
     
+    /**
+     * Dodo lays a stairwell of eggs.
+     * 
+     * <p> Initial: Dodo is at the top left of the world.
+     * <p> Final: Dodo has layed a stairwell of eggs.
+     */
     public void makeStairOfEggs() {
         for (int worldWidth = 0; worldWidth < getWorld().getWidth(); worldWidth++) {
             if(canMove()) {
@@ -528,6 +547,34 @@ public class MyDodo extends Dodo
             }
         }
         
+        goToLocation(0, 0);
+        faceDirection(1);
+    }
+    
+    /**
+     * Dodo has layed a second patern of eggs. (Multiplying every time times itself)
+     * 
+     * <p> Initial: Dodo is at the top left of the world
+     * <p> Final: Dodo is back at the top left of the world and has layed a second patern of eggs.
+     */
+    public void makeStairOfEggsWithExtraSteps() {
+        int stepDuplicate = 1;
+        
+        for (int worldWidth = 0; worldWidth < getWorld().getWidth(); worldWidth++) {
+            if (canMove()) {
+                layTrailOfEggs(stepDuplicate);
+                goBackToStartOfRowAndFaceBack();
+                turnRight();
+                if (!borderAhead()) {
+                    move();
+                    turnLeft();
+                } else {
+                    turnLeft();
+                }
+                stepDuplicate = stepDuplicate * 2;
+            }
+        }
+    
         goToLocation(0, 0);
         faceDirection(1);
     }
