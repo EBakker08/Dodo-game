@@ -440,7 +440,6 @@ public class MyDodo extends Dodo
             move();
         }
         
-        turn180();
         goBackToStartOfRowAndFaceBack();
         
         return eggCounter;
@@ -616,5 +615,35 @@ public class MyDodo extends Dodo
         
         goToLocation(0, 0);
         faceDirection(1);
+    }
+    
+    /**
+     * Dodo counts the average amount of eggs in world
+     * 
+     * <p> Initial: Dodo is at the top left of the world
+     * <p> Final: Dodo has counted all the eggs and given the average of the eggs.
+     */
+    public double averageOfEggsPerRow() {
+        double averageOfEggs = 0;
+        double totalOfEggs = 0;
+        int rows = 0;
+        
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
+            totalOfEggs = totalOfEggs + countEggsInRow();
+            turnRight();
+            if (canMove()) {
+                move();
+                turnLeft();
+            } else {
+                break;
+            }
+        }
+        
+        averageOfEggs = totalOfEggs / getWorld().getHeight();
+        
+        goToLocation(0, 0);
+        faceDirection(1);
+        
+        return averageOfEggs;
     }
 }
