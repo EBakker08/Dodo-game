@@ -578,4 +578,43 @@ public class MyDodo extends Dodo
         goToLocation(0, 0);
         faceDirection(1);
     }
+    
+    /**
+     * Dodo lays pyramid of eggs.
+     * 
+     * <p> Initial: Dodo is in the center of any row.
+     * <p> Final: Dodo has layed a pyramid of eggs and has returned to the top left of the map.
+     */
+    public void makePyramidOfEggs() {  
+        int eggsInRow = 1;
+        int stepsMade = 0;
+        int moved = 0;
+    
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
+            layTrailOfEggs(eggsInRow);
+            stepsMade = eggsInRow;
+            turn180();
+            
+            while (moved != stepsMade) {
+                move();
+                moved++;
+            }
+            
+            move();
+            moved = 0;
+            
+            if (!canMove()) {
+                break;
+            }
+    
+            turnLeft();
+            move();
+            turnLeft();
+    
+            eggsInRow = eggsInRow + 2;
+        }
+        
+        goToLocation(0, 0);
+        faceDirection(1);
+    }
 }
