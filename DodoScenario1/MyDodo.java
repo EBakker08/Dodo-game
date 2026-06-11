@@ -104,7 +104,7 @@ public class MyDodo extends Dodo
      * <p> Final:   Dodo is on East side of world facing East. Coordinates of each cell printed in the console.
      */
     public void walkToWorldEdge( ){
-        while(canMove()){
+        while(!borderAhead()) {
             move();
         }
     }
@@ -429,18 +429,19 @@ public class MyDodo extends Dodo
      */
     public int countEggsInRow() {
         int eggCounter = 0;
+        
+        goBackToStartOfRowAndFaceBack();
+        
         if (onEgg()) {
             eggCounter++;
         }
         
         while (!borderAhead()) {
+            move();
             if (onEgg()) {
                 eggCounter++;
             }
-            move();
         }
-        
-        goBackToStartOfRowAndFaceBack();
         
         return eggCounter;
     }
@@ -645,5 +646,60 @@ public class MyDodo extends Dodo
         faceDirection(1);
         
         return averageOfEggs;
+    }
+    
+    /**
+     * Dodo lays egg on broken row
+     * 
+     * <p> Initial: Dodo is on top left facing east.
+     * <p> Final: Dodo has counted all the eggs in the world and has layed an egg on the location where an egg should be
+     */
+    public void makeThemEggsEven() {
+        int errorLineX = 0;
+        int errorLineY = 0;
+        
+        goToLocation(0, 0);
+        faceDirection(1);
+        
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
+            int eggs = countEggsInRow();
+            
+            turnRight();
+            if (canMove()) {
+                move();
+                turnLeft();
+            } else {
+                faceDirection(1);
+            }
+            
+            if (eggs % 2 == 1) {
+                errorLineX = getY();
+                System.out.println("Y: " + errorLineX);
+            }
+        }
+        
+        for (int worldWidth = 0; worldWidth < getWorld().getWidth(); worldWidth++) {
+            faceDirection(0);
+            
+            int eggs = countEggsInRow();
+            
+            turnLeft();
+            if (canMove()) {
+                move();
+                turnLeft();
+            } else {
+                faceDirection(1);
+            }
+            
+            if (eggs % 2 == 1) {
+                errorLineY = getX();
+                System.out.println("X: " + errorLineY);
+            }
+        }
+        
+        if (errorLineX != -1 && errorLineY != -1) {
+            goToLocation(errorLineX, errorLineY);
+            layEgg();
+        }
     }
 }
