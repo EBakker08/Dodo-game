@@ -654,7 +654,7 @@ public class MyDodo extends Dodo
      * <p> Initial: Dodo is on top left facing east.
      * <p> Final: Dodo has counted all the eggs in the world and has layed an egg on the location where an egg should be
      */
-    public void makeThemEggsEven() {
+    public void makeEggsEven() {
         int errorLineX = 0;
         int errorLineY = 0;
         
@@ -701,5 +701,8 @@ public class MyDodo extends Dodo
             goToLocation(errorLineX, errorLineY);
             layEgg();
         }
+        
+        goToLocation(0, 0);
+        faceDirection(1);
     }
 }
