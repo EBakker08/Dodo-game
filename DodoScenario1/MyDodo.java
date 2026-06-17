@@ -705,4 +705,60 @@ public class MyDodo extends Dodo
         goToLocation(0, 0);
         faceDirection(1);
     }
+    
+    /**
+     * dodo will make the world even without using any derictional functions.
+     * 
+     * <p> Initial: Dodo is in the world.
+     * <p> Final: Dodo has layed an egg on the location that it should be.
+     */
+    public void makeEggsEvenVersionAfterNoBrain(){
+        walkToWorldEdge();
+        turnLeft();
+        walkToWorldEdge();
+        turn180();
+        
+        int moved = 0;
+
+        while(!borderAhead()){
+            int eggs = countEggsInRow();
+            
+            goBackToStartOfRowAndFaceBack();        
+
+            if(eggs % 2 == 1){
+                walkToWorldEdge();
+                turnLeft();
+                walkToWorldEdge();
+                turn180();
+                
+                while(!borderAhead()){
+                    eggs = countEggsInRow();
+                    goBackToStartOfRowAndFaceBack();
+
+                    if(eggs % 2 == 1){
+                        jump(moved);
+                        layEgg();
+                        break;
+                    }
+                    turnRight();
+                    if(borderAhead()){
+                        break;
+                    }
+                    move();
+                    turnLeft();
+                }
+                break;
+            }
+
+            turnRight();
+            
+            if(borderAhead()){
+                break;
+            }
+            
+            move();
+            moved++;
+            turnLeft();
+        }
+    }
 }
