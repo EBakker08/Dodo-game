@@ -1,4 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 /**
  *
@@ -760,5 +763,36 @@ public class MyDodo extends Dodo
             moved++;
             turnLeft();
         }
+    }
+
+    /**
+     * Places all the Egg objects in the world in a list.
+     * 
+     * @return List of Egg objects in the world
+     */
+    public List<Egg> getListOfEggsInWorld() {
+        return getWorld().getObjects(Egg.class);
+    }
+
+    public List<Integer> createListOfNumbers() {
+        return new ArrayList<> (Arrays.asList( 2, 43, 7, -5, 12, 7 ));
+    }
+
+    /**
+     * Method for praciticing with lists.
+     */
+    public void practiceWithLists( ){
+        List<Integer> listOfNumbers = createListOfNumbers();
+        
+        //the following is incorrect and is to be fixed in challenge 6.1c
+        System.out.println("First element: " + listOfNumbers.get(1) ); 
+    }
+
+    public void practiceWithListsOfSurpriseEggs( ){
+        List<SurpriseEgg>  listOfEgss = SurpriseEgg.generateListOfSurpriseEggs( 12, getWorld() );
+    }
+    
+    public void makeListOfSurpriseEggs() {
+        generateListOfSurpriseEggs(getWorld().getHeight());
     }
 }
