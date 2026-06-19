@@ -6,6 +6,7 @@ class.Grain.image=grain.png
 class.Mauritius.image=sandstone60.jpg
 class.MyDodo.image=dodo-new-right.png
 class.Nest.image=nest.png
+class.SurpriseEgg.image=new-rainbow-egg.png
 dependency1.from=Mauritius
 dependency1.to=Scoreboard
 dependency1.type=UsesDependency

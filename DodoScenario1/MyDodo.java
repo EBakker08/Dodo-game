@@ -792,7 +792,31 @@ public class MyDodo extends Dodo
         List<SurpriseEgg>  listOfEgss = SurpriseEgg.generateListOfSurpriseEggs( 12, getWorld() );
     }
     
+    /**
+     * 10 surprise eggs get put on random places in the world.
+     * 
+     * <p> Initial: There is a world with 10 or more spaces.
+     * <p> Final: The world is filled with 10 eggs.
+     */
     public void makeListOfSurpriseEggs() {
-        generateListOfSurpriseEggs(getWorld().getHeight());
+        SurpriseEgg.generateListOfSurpriseEggs(10, getWorld());
+    }
+
+    public void printCoordinateOfEgg(Egg egg) {
+        System.out.println("X: " + egg.getX() + " Y: " + egg.getY());
+    }
+    
+    /**
+     * 10 surprise eggs get put on random places in the world and the coordinates of these eggs are printed in the console.
+     * 
+     * <p> Initial: There is a world with 10 or more spaces.
+     * <p> Final: The world is filled with 10 eggs on random positions and we know the coordinates.
+     */
+    public void makeListOfSurpriseEggsPrintingCoordinates() {
+        SurpriseEgg.generateListOfSurpriseEggs(10, getWorld());
+        
+        for (Egg egg : getListOfEggsInWorld()) {
+            printCoordinateOfEgg(egg);
+        }
     }
 }
