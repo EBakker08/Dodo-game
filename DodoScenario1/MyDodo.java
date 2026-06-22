@@ -798,8 +798,9 @@ public class MyDodo extends Dodo
      * <p> Initial: There is a world with 10 or more spaces.
      * <p> Final: The world is filled with 10 eggs.
      */
-    public void makeListOfSurpriseEggs() {
-        SurpriseEgg.generateListOfSurpriseEggs(10, getWorld());
+    public List<SurpriseEgg> makeListOfSurpriseEggs() {
+        List<SurpriseEgg> eggs = SurpriseEgg.generateListOfSurpriseEggs(10, getWorld());
+        return eggs;
     }
 
     public void printCoordinateOfEgg(Egg egg) {
@@ -813,10 +814,35 @@ public class MyDodo extends Dodo
      * <p> Final: The world is filled with 10 eggs on random positions and we know the coordinates.
      */
     public void makeListOfSurpriseEggsPrintingCoordinates() {
-        SurpriseEgg.generateListOfSurpriseEggs(10, getWorld());
+        makeListOfSurpriseEggs();
         
         for (Egg egg : getListOfEggsInWorld()) {
             printCoordinateOfEgg(egg);
         }
+    }
+    
+    /**
+     * 
+     * 
+     * <p> Initial: 
+     * <p> Final: 
+     */
+    public void mostValuableEgg() {
+        int highestValueEgg = 0;
+        int indexHighestEgg = -1;
+        int highestEgg = -1;
+        
+        makeListOfSurpriseEggs();
+        
+        for (Egg egg : getListOfEggsInWorld()) {
+            indexHighestEgg++;
+            
+            if (egg.getValue() > highestValueEgg) {
+                highestValueEgg = egg.getValue();
+                highestEgg = indexHighestEgg;
+            }
+        }
+        
+        System.out.println(highestEgg);
     }
 }
