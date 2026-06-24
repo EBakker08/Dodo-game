@@ -822,10 +822,10 @@ public class MyDodo extends Dodo
     }
     
     /**
+     * We get the highest value of an egg.
      * 
-     * 
-     * <p> Initial: 
-     * <p> Final: 
+     * <p> Initial: Eggs get spawned into the world.
+     * <p> Final: All eggs are looked at and then one egg has the highest value.
      */
     public void mostValuableEgg() {
         int highestValueEgg = 0;
@@ -844,5 +844,28 @@ public class MyDodo extends Dodo
         }
         
         System.out.println(highestEgg);
+    }
+    
+    /**
+     * All value's of eggs get counted up and devided by their amount to get the average value of an egg.
+     * 
+     * <p> Initial: An amount of eggs get spawned in the world.
+     * <p> Final: All values of eggs have been added up and devided by their amount to get one average number.
+     */
+    public void averageValueOfEggs() {
+        int totalValueOfEggs = 0;
+        int averageValueOfEggs = 0;
+        
+        makeListOfSurpriseEggs();
+        
+        List<Egg> eggs = getListOfEggsInWorld();
+        
+        for (Egg egg : getListOfEggsInWorld()) {
+            totalValueOfEggs = totalValueOfEggs + egg.getValue();
+        }
+        
+        averageValueOfEggs = totalValueOfEggs / eggs.size();
+        
+        System.out.println(averageValueOfEggs);
     }
 }
