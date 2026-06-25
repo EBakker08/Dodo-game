@@ -872,19 +872,21 @@ public class MyDodo extends Dodo
     }
     
     /**
+     * Dodo moves in a random direction for the amount of times that the user puts in.
      * 
-     * 
-     * <p>
-     * <p>
+     * <p> Initial: Dodo is somewhere in the world.
+     * <p> Finals: Dodo has moved randomly for the amount of times that the user put in.
      */
-    public void moveRandomly() {
-        int moved = 0;
+    public void moveRandomly(int moves) {
+        int moved = moves;
         
-        while (moved != 40) {
+        while (moved != 0) {
             faceDirection(randomDirection());
+            
             if (canMove()) {
                 move();
-                moved++;
+                moved = moved - 1;
+                
                 System.out.println("Moved: " + moved);
             } else {
                 faceDirection(randomDirection());
@@ -898,7 +900,7 @@ public class MyDodo extends Dodo
      * <p>
      * <p>
      */
-    public void getScore() {
+    public void getScore(int score1, int score2) {
         
     }
     
@@ -909,6 +911,10 @@ public class MyDodo extends Dodo
      * <p>
      */
     public void searchClosestEgg() {
+        List<Egg> eggs = getListOfEggsInWorld();
         
+        // Get coordinates of closest egg
+        
+        goToLocation(0, 0);
     }
 }
