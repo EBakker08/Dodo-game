@@ -352,6 +352,8 @@ public class MyDodo extends Dodo
             while (getDirection() != newDirection) {
                 turnRight();
             }
+        } else {
+            showError("Not an option!");
         }
     }
     
@@ -867,5 +869,46 @@ public class MyDodo extends Dodo
         averageValueOfEggs = totalValueOfEggs / eggs.size();
         
         System.out.println(averageValueOfEggs);
+    }
+    
+    /**
+     * 
+     * 
+     * <p>
+     * <p>
+     */
+    public void moveRandomly() {
+        int moved = 0;
+        
+        while (moved != 40) {
+            faceDirection(randomDirection());
+            if (canMove()) {
+                move();
+                moved++;
+                System.out.println("Moved: " + moved);
+            } else {
+                faceDirection(randomDirection());
+            }
+        }
+    }
+    
+    /**
+     * 
+     * 
+     * <p>
+     * <p>
+     */
+    public void getScore() {
+        
+    }
+    
+    /**
+     * 
+     * 
+     * <p>
+     * <p>
+     */
+    public void searchClosestEgg() {
+        
     }
 }
