@@ -905,16 +905,40 @@ public class MyDodo extends Dodo
     }
     
     /**
+     * Dodo finds closest egg and takes it.
      * 
-     * 
-     * <p>
-     * <p>
+     * <p> Initial:  Dodo is somewhere in the world with eggs.
+     * <p> Final: Dodo has gone to the closest egg in the world to him and taken it.
      */
-    public void searchClosestEgg() {
+    public void searchClosestEggAndPickItUp() {
         List<Egg> eggs = getListOfEggsInWorld();
         
-        // Get coordinates of closest egg
+        Egg closestEgg = null;
+        int smallestDistance = -1;
+        int closestEggX = 0;
+        int closestEggY = 0;
         
-        goToLocation(0, 0);
+        for (Egg egg : eggs) {
+            int aOrX = 0;   // A kwadraat is X
+            int bOrY = 0;   // B kwadraat is y
+            int c = 0;
+            
+            // Stelling van Pythagoras
+            aOrX = egg.getX() - getX();
+            bOrY = egg.getY() - getY();
+            
+            c = aOrX * aOrX + bOrY * bOrY;
+            
+            if (closestEgg == null || c < smallestDistance) {
+                closestEgg = egg;
+                smallestDistance = c;
+            }
+        }
+        
+        closestEggX = closestEgg.getX();
+        closestEggY = closestEgg.getY();
+        
+        goToLocation(closestEggX, closestEggY);
+        pickUpEgg();
     }
 }
