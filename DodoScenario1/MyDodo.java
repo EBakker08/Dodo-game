@@ -886,8 +886,9 @@ public class MyDodo extends Dodo
             if (canMove()) {
                 move();
                 moved = moved - 1;
+                getScore(moved, getNrOfEggsHatched());
                 
-                System.out.println("Moved: " + moved);
+                System.out.println("Moved: " + moved + "\nEggs hatched: " + getNrOfEggsHatched());
             } else {
                 faceDirection(randomDirection());
             }
@@ -901,7 +902,8 @@ public class MyDodo extends Dodo
      * <p>
      */
     public void getScore(int score1, int score2) {
-        
+        Mauritius world = (Mauritius) getWorld();
+        world.updateScore(score1, score2);
     }
     
     /**
