@@ -387,22 +387,22 @@ public class MyDodo extends Dodo
         int moveX = coordX - getX();
         int moveY = coordY - getY();
         
-        if(moveX > 0){
+        if (moveX > 0){
            setDirection(0);
            turnRight();
            jump(moveX);
-        }else{
+        } else {
            moveX = moveX *-1;
            setDirection(0);
            turnLeft();
            jump(moveX);
         }
         
-        if(moveY < 0){
+        if (moveY < 0){
            moveY = moveY *-1;
            setDirection(0);
            jump(moveY);
-        }else{
+        } else {
            setDirection(0);
            turn180();
            jump(moveY);
@@ -886,21 +886,14 @@ public class MyDodo extends Dodo
             if (canMove()) {
                 move();
                 moved = moved - 1;
-                getScore(moved, getNrOfEggsHatched());
                 
-                System.out.println("Moved: " + moved + "\nEggs hatched: " + getNrOfEggsHatched());
+                System.out.println("Moves left: " + moved + "\nEggs hatched: " + getNrOfEggsHatched());
             } else {
                 faceDirection(randomDirection());
             }
         }
     }
     
-    /**
-     * 
-     * 
-     * <p>
-     * <p>
-     */
     public void getScore(int score1, int score2) {
         Mauritius world = (Mauritius) getWorld();
         world.updateScore(score1, score2);
@@ -912,7 +905,7 @@ public class MyDodo extends Dodo
      * <p> Initial:  Dodo is somewhere in the world with eggs.
      * <p> Final: Dodo has gone to the closest egg in the world to him and taken it.
      */
-    public void searchClosestEggAndPickItUp() {
+    public int searchClosestEggAndPickItUp() {
         List<Egg> eggs = getListOfEggsInWorld();
         
         Egg closestEgg = null;
@@ -937,10 +930,84 @@ public class MyDodo extends Dodo
             }
         }
         
-        closestEggX = closestEgg.getX();
-        closestEggY = closestEgg.getY();
+        if (closestEgg != null) {
+            int distanceX = closestEgg.getX() - getX();
+            int distanceY = closestEgg.getY() - getY();
+            
+            int stepsTaken = distanceX + distanceY;   // dit is het aantal stappen dat goToLocation zet
+            
+            goToLocation(closestEgg.getX(), closestEgg.getY());
+            pickUpEgg();
+            return stepsTaken;
+        } else {
+            showError("There are no eggs left in the world.");
+            return 0;
+        }
+    }
+    
+    /**
+     * 
+     */
+    public void eindopdrachtAlgorithm(int howManyMoves) {
+        int moves = howManyMoves;
+        int moved = 0;
+        int eggScore = 0;
         
-        goToLocation(closestEggX, closestEggY);
-        pickUpEgg();
+        do {
+            Egg closestEgg = findClosestEgg();
+            
+            if (closestEgg != null) {
+                int distanceX = closestEgg.getX() - getX();
+                int distanceY = closestEgg.getY() - getY();
+                
+                if (distanceX > 0) {
+                    faceDirection(1);
+                } else if (distanceX < 0) {
+                    faceDirection(3);
+                } else if (distanceY > 0) {
+                    faceDirection(2);
+                } else if (distanceY < 0) {
+                    faceDirection(0);
+                }
+            }
+            
+            if (canMove()) {
+                move();
+                moved++;
+                System.out.println(moved);
+                moves = moves - 1;
+                
+                if (onEgg()) {
+                    Egg pickedUpEgg = pickUpEgg();
+                    eggScore = eggScore + pickedUpEgg.getValue();
+                }
+                
+                getScore(moves, eggScore);
+            }
+        } while (moves != 0 && getListOfEggsInWorld().size() > 0);
+        
+        goToLocation(0, 0);
+        faceDirection(1);
+    }
+    
+    public Egg findClosestEgg() {
+        List<Egg> eggs = getListOfEggsInWorld();
+        
+        Egg closestEgg = null;
+        int smallestDistance = -1;
+        
+        for (Egg egg : eggs) {
+            int aOrX = egg.getX() - getX();
+            int bOrY = egg.getY() - getY();
+            
+            int c = aOrX * aOrX + bOrY * bOrY;
+            
+            if (closestEgg == null || c < smallestDistance) {
+                closestEgg = egg;
+                smallestDistance = c;
+            }
+        }
+        
+        return closestEgg;
     }
 }
