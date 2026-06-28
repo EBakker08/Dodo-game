@@ -107,7 +107,7 @@ public class MyDodo extends Dodo
      * <p> Final:   Dodo is on East side of world facing East. Coordinates of each cell printed in the console.
      */
     public void walkToWorldEdge( ){
-        while(!borderAhead()) {
+        while(!borderAhead()) { // While no fence or border ahead, move forward.
             move();
         }
     }
@@ -152,16 +152,16 @@ public class MyDodo extends Dodo
     
     public void climbOverFence() {
         if (fenceAhead()) {
-        turnLeft();     // Face upwards
-        move();         // Move up
-        turnRight();    // Turn facing right
-        move();         // Move to the right
-        move();         // Move to the right
-        turnRight();    // Face down
-        move();         // Move down
-        turnLeft();     // Turn facing right
+            turnLeft();     // Face upwards
+            move();         // Move up
+            turnRight();    // Turn facing right
+            move();         // Move to the right
+            move();         // Move to the right
+            turnRight();    // Face down
+            move();         // Move down
+            turnLeft();     // Turn facing right
         } else {
-            showError("No fence to climb!");
+            showError("No fence to climb!");    // If there is no fence, show this error
         }
     }
     
@@ -179,7 +179,7 @@ public class MyDodo extends Dodo
     }
     
     /**
-     * Dodo goes to an egg.
+     * Dodo goes to an egg on the same line as the dodo.
      * 
      * <p> Initial: Dodo is somewhere in the world with an egg on its path.
      * <p> Final: Dodo is on the closest egg.
@@ -197,9 +197,9 @@ public class MyDodo extends Dodo
      * <p> Final: Dodo is on the last cell in the world facing the other way.
      */
     public void goBackToStartOfRowAndFaceBack() {
-        turn180();
-        walkToWorldEdge();
-        turn180();
+        turn180();  // Turn back the other way
+        walkToWorldEdge();  // Go back to the start of the row
+        turn180();  // Turn back to the original direction
     }
     
     /**
@@ -209,15 +209,15 @@ public class MyDodo extends Dodo
      * <p> Final: Dodo is at a nest and layed an egg while he has climbed over all fences in its path.
      */
     public void walkToWorldEdgeClimbingOverFenceAndLayEgg() {
-        while (!onNest()) {
+        while (!onNest()) { // While not on egg do this:
             move();
-            if (fenceAhead() == true) {
-                climbOverFence();
+            if (fenceAhead() == true) { // If a fence is ahead...
+                climbOverFence();   // ...climb over it
             }
             
-            if (onNest() == true) {
+            if (onNest() == true) { // When dodo is on nest...
                 if (!onEgg()) {
-                    layEgg();
+                    layEgg();   // ...lay egg in it
                 }
             }
         }
@@ -232,9 +232,9 @@ public class MyDodo extends Dodo
     public void pickUpGrainsAndPrintCoordinates() {
         while (borderAhead() == false) {
             move();
-            if (onGrain() == true) {
-                pickUpGrain();
-                System.out.println("X: " + super.getX() + " Y: " + super.getY());
+            if (onGrain() == true) {    // If dodo is on a grain
+                pickUpGrain();  // Pick grain up
+                System.out.println("X: " + super.getX() + " Y: " + super.getY());   // Print coordinates of where dodo has picked up grain
             }
         }
     }
@@ -258,9 +258,9 @@ public class MyDodo extends Dodo
      * <p> Final: Dodo is at the edge of the world and has layed eggs in every empty nest.
      */
     public void walkToWorldEdgeAndLayEggs() {
-        while (!borderAhead()) {
+        while (!borderAhead()) {    // While dodo is not at he end of the world
             move();
-            if (onNest()) {
+            if (onNest()) { // Lay an egg on every nest dodo encounters
                 if (!onEgg()) {
                     layEgg();
                 }
@@ -293,13 +293,13 @@ public class MyDodo extends Dodo
     public void eggTrailToNest() {
         move();
         while (!onNest()) {
-            if (eggAhead() || nestAhead()) {
+            if (eggAhead() || nestAhead()) {    // If there is an egg or a nest infront of dodo
                 move ();
-            } else {
+            } else {    // Otherwise turn to the right
                 turnRight();
-                if (!eggAhead()) {
+                if (!eggAhead()) {  // If there is still no egg infront of dodo
                     turn180();
-                }
+                }   // And repeat
             }
         }
     }
@@ -311,13 +311,13 @@ public class MyDodo extends Dodo
      * <p> Final: Dodo is on nest and has solved the maze.
      */
     public void walkToNestInMaze() {
-        while (!onNest()) {
+        while (!onNest()) { // While dodo is not on a nest
             turnRight();
-            if (canMove()) {
+            if (canMove()) {    // If the dodo can move
                 move();
             } else {
-                turnLeft();
-                while (!canMove()) {
+                turnLeft(); // Turn left if dodo cant move
+                while (!canMove()) {    // while dodo cant move, turn left
                     turnLeft();
                 }
                 move();
@@ -325,7 +325,7 @@ public class MyDodo extends Dodo
         }
         
         if (onNest()) {
-            showCompliment("Congratulations! You found the nest.");
+            showCompliment("Congratulations! You found the nest."); // When dodo has found the nest, give compliment
         }
     }
     
@@ -337,7 +337,7 @@ public class MyDodo extends Dodo
      */
     public void faceEast() {
         while (getDirection() != EAST) {
-            turnRight();
+            turnRight();    // While dodo is not facing east, turn right.
         }
     }
     
@@ -348,12 +348,12 @@ public class MyDodo extends Dodo
      * <p> Final: Dodo is facing the direction that the user told it to.
      */
     public void faceDirection(int newDirection) {
-        if (newDirection >= 0 && newDirection <= 3) {
+        if (newDirection >= 0 && newDirection <= 3) {   // If user input is between 0 and 3 do this
             while (getDirection() != newDirection) {
                 turnRight();
             }
         } else {
-            showError("Not an option!");
+            showError("Not an option!");    // If user input is bellow 0 or above 3 show this error.
         }
     }
     
@@ -383,11 +383,11 @@ public class MyDodo extends Dodo
      * <p> Initial: Dodo is somewhere in the world.
      * <p> Final: Dodo has walked to coordinates that user put in and faces east.
      */
-    public void goToLocation(int coordX, int coordY){
-        int moveX = coordX - getX();
+    public void goToLocation(int coordX, int coordY){   // give the coordinates you want to go to
+        int moveX = coordX - getX();    // do the current coordinates of dodo minus the coordinates you want to go to
         int moveY = coordY - getY();
         
-        if (moveX > 0){
+        if (moveX > 0){ // If moveX is higher then 0
            setDirection(0);
            turnRight();
            jump(moveX);
@@ -398,7 +398,7 @@ public class MyDodo extends Dodo
            jump(moveX);
         }
         
-        if (moveY < 0){
+        if (moveY < 0){ // do the same for the Y axis
            moveY = moveY *-1;
            setDirection(0);
            jump(moveY);
@@ -413,9 +413,6 @@ public class MyDodo extends Dodo
     
     /**
      * Check if coordinate input is lower or equal to world width and height.
-     * 
-     * <p> Initial: Dodo is somewhere in world.
-     * <p> Final: Coordinate input gets validated.
      */
     public boolean validCoordinates(int x, int y) {
         if (x > getWorld().getWidth() || y > getWorld().getWidth()) {
@@ -460,10 +457,10 @@ public class MyDodo extends Dodo
     public void layTrailOfEggs(int layEgg) {
         int moved = 0;
         
-        while (moved < layEgg) {
+        while (moved < layEgg) {    // Do the following while moved is bellow inputed layEggs
             layEgg();
             moved++;
-            if (borderAhead()) {
+            if (borderAhead()) {    // If there is a border ahead then stop the loop
                 break;
             }
             move();
@@ -479,11 +476,11 @@ public class MyDodo extends Dodo
     public void countAllEggsInWorld() {
         int countedEggs = 0;
         
-        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
-            countedEggs = countedEggs + countEggsInRow();
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {    // Do the following for the whole lenght of the world
+            countedEggs = countedEggs + countEggsInRow();   // Count all eggs in the current row
             System.out.println(countedEggs);
             turnRight();
-            if (!borderAhead()) {
+            if (!borderAhead()) {   // Move down if posible and repeat
                 move();
                 turnLeft();
             }
@@ -492,7 +489,7 @@ public class MyDodo extends Dodo
         goToLocation(0, 0);
         faceDirection(1);
         
-        showCompliment("Congratulations! You've collected " + countedEggs);
+        showCompliment("Congratulations! You've counted " + countedEggs);
     }
     
     /**
@@ -509,13 +506,13 @@ public class MyDodo extends Dodo
         for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
             System.out.println("On row " + onRow + " is/are " + countEggsInRow() + " egg(s)");
             
-            if (countEggsInRow() > highestEggAmount) {
+            if (countEggsInRow() > highestEggAmount) {  // If the current counted row is higher then the row that had the most eggs, overwrite it
                 highestEggAmount = highestEggAmount;
                 highestEggsAmountRow = onRow;
             }
         
             turnRight();
-            if (!borderAhead()) {
+            if (!borderAhead()) {   // Move down and do the same
                 move();
                 turnLeft();
             } else {
@@ -634,18 +631,18 @@ public class MyDodo extends Dodo
         double totalOfEggs = 0;
         int rows = 0;
         
-        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {    // Count all the eggs in the world
             totalOfEggs = totalOfEggs + countEggsInRow();
             turnRight();
             if (canMove()) {
                 move();
                 turnLeft();
-            } else {
+            } else {    // If you cant move then stop the loop
                 break;
             }
         }
         
-        averageOfEggs = totalOfEggs / getWorld().getHeight();
+        averageOfEggs = totalOfEggs / getWorld().getHeight();   // Devide the total amount of eggs in the world by the height of the world.
         
         goToLocation(0, 0);
         faceDirection(1);
@@ -663,10 +660,10 @@ public class MyDodo extends Dodo
         int errorLineX = 0;
         int errorLineY = 0;
         
-        goToLocation(0, 0);
+        goToLocation(0, 0); // Go to starting location
         faceDirection(1);
         
-        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {
+        for (int worldHeight = 0; worldHeight < getWorld().getHeight(); worldHeight++) {    // Count all the eggs in the rows on the Y axis
             int eggs = countEggsInRow();
             
             turnRight();
@@ -677,13 +674,13 @@ public class MyDodo extends Dodo
                 faceDirection(1);
             }
             
-            if (eggs % 2 == 1) {
+            if (eggs % 2 == 1) {    // If the row equals 1 then save the row
                 errorLineX = getY();
                 System.out.println("Y: " + errorLineX);
             }
         }
         
-        for (int worldWidth = 0; worldWidth < getWorld().getWidth(); worldWidth++) {
+        for (int worldWidth = 0; worldWidth < getWorld().getWidth(); worldWidth++) {    // Count all the eggs in the rows on the X axis
             faceDirection(0);
             
             int eggs = countEggsInRow();
@@ -696,18 +693,18 @@ public class MyDodo extends Dodo
                 faceDirection(1);
             }
             
-            if (eggs % 2 == 1) {
+            if (eggs % 2 == 1) {    // Do the same for the X axis
                 errorLineY = getX();
                 System.out.println("X: " + errorLineY);
             }
         }
         
-        if (errorLineX != -1 && errorLineY != -1) {
+        if (errorLineX != -1 && errorLineY != -1) { // Go to the location where the error line is and lay an egg
             goToLocation(errorLineX, errorLineY);
             layEgg();
         }
         
-        goToLocation(0, 0);
+        goToLocation(0, 0); // Go back to starting location
         faceDirection(1);
     }
     
@@ -834,12 +831,12 @@ public class MyDodo extends Dodo
         int indexHighestEgg = -1;
         int highestEgg = -1;
         
-        makeListOfSurpriseEggs();
+        makeListOfSurpriseEggs();   // Print out a list of surprise eggs
         
-        for (Egg egg : getListOfEggsInWorld()) {
+        for (Egg egg : getListOfEggsInWorld()) {    // for each egg, do the following
             indexHighestEgg++;
             
-            if (egg.getValue() > highestValueEgg) {
+            if (egg.getValue() > highestValueEgg) { // get the value of the egg and if its higher then the last saved then overwrite it
                 highestValueEgg = egg.getValue();
                 highestEgg = indexHighestEgg;
             }
@@ -862,11 +859,11 @@ public class MyDodo extends Dodo
         
         List<Egg> eggs = getListOfEggsInWorld();
         
-        for (Egg egg : getListOfEggsInWorld()) {
+        for (Egg egg : getListOfEggsInWorld()) {    // Add up the whole value of the list of eggs in the world
             totalValueOfEggs = totalValueOfEggs + egg.getValue();
         }
         
-        averageValueOfEggs = totalValueOfEggs / eggs.size();
+        averageValueOfEggs = totalValueOfEggs / eggs.size();    // Devide the value of all eggs combined by the size of the eggs list
         
         System.out.println(averageValueOfEggs);
     }
@@ -877,19 +874,17 @@ public class MyDodo extends Dodo
      * <p> Initial: Dodo is somewhere in the world.
      * <p> Finals: Dodo has moved randomly for the amount of times that the user put in.
      */
-    public void moveRandomly(int moves) {
+    public void moveRandomly(int moves) {   // Give how many moves dodo can make
         int moved = moves;
         
-        while (moved != 0) {
-            faceDirection(randomDirection());
+        while (moved != 0) {    // Do the following while moved doesnt equal 0
+            faceDirection(randomDirection());   // Face a random direction
             
-            if (canMove()) {
+            if (canMove()) {    // If dodo can move
                 move();
                 moved = moved - 1;
-                
-                System.out.println("Moves left: " + moved + "\nEggs hatched: " + getNrOfEggsHatched());
             } else {
-                faceDirection(randomDirection());
+                faceDirection(randomDirection());   // Otherwise pick another random direction
             }
         }
     }
@@ -945,9 +940,6 @@ public class MyDodo extends Dodo
         }
     }
     
-    /**
-     * 
-     */
     public void eindopdrachtAlgorithm(int howManyMoves) {
         int moves = howManyMoves;
         int moved = 0;
