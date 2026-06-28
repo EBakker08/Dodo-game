@@ -948,53 +948,49 @@ public class MyDodo extends Dodo
         do {
             Egg closestEgg = findClosestEgg();
             
-            if (closestEgg != null) {
+            if (closestEgg != null) {   // If there is no closest egg
                 int distanceX = closestEgg.getX() - getX();
                 int distanceY = closestEgg.getY() - getY();
                 
-                if (distanceX > 0) {
+                if (distanceX > 0) {    // If egg is to the right, turn east
                     faceDirection(1);
-                } else if (distanceX < 0) {
+                } else if (distanceX < 0) { // If egg is to the left, turn west
                     faceDirection(3);
-                } else if (distanceY > 0) {
+                } else if (distanceY > 0) { // If egg is to the bottom, turn south
                     faceDirection(2);
-                } else if (distanceY < 0) {
+                } else if (distanceY < 0) { // If egg is upwards, turn north
                     faceDirection(0);
                 }
             }
             
-            if (canMove()) {
+            if (canMove()) {    // If dodo can move
                 move();
                 moved++;
-                System.out.println(moved);
                 moves = moves - 1;
                 
-                if (onEgg()) {
-                    Egg pickedUpEgg = pickUpEgg();
-                    eggScore = eggScore + pickedUpEgg.getValue();
+                if (onEgg()) {  // If dodo is on egg
+                    Egg pickedUpEgg = pickUpEgg();  // Pick up the egg
+                    eggScore = eggScore + pickedUpEgg.getValue();   // Depending on color of egg, add to score
                 }
                 
-                getScore(moves, eggScore);
+                getScore(moves, eggScore);  // Update scoreboard
             }
-        } while (moves != 0 && getListOfEggsInWorld().size() > 0);
-        
-        goToLocation(0, 0);
-        faceDirection(1);
+        } while (moves != 0 && getListOfEggsInWorld().size() > 0);  // Do all of this while dodo can legaly move and eggs in world arent 0
     }
     
     public Egg findClosestEgg() {
-        List<Egg> eggs = getListOfEggsInWorld();
+        List<Egg> eggs = getListOfEggsInWorld();    // Get all eggs in world
         
         Egg closestEgg = null;
         int smallestDistance = -1;
         
         for (Egg egg : eggs) {
-            int aOrX = egg.getX() - getX();
-            int bOrY = egg.getY() - getY();
+            int aOrX = egg.getX() - getX(); // Distance from dodo on X axis
+            int bOrY = egg.getY() - getY(); // Distance from dodo in Y axis
             
             int c = aOrX * aOrX + bOrY * bOrY;
             
-            if (closestEgg == null || c < smallestDistance) {
+            if (closestEgg == null || c < smallestDistance) {   // If egg is closer then last saved egg then save current egg
                 closestEgg = egg;
                 smallestDistance = c;
             }
